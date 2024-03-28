@@ -48,10 +48,6 @@ class TKBCOptimizer(object):
                 for param in self.model.parameters():
                     if param.grad is not None:
                         if torch.isnan(param.grad).any():
-                            # 将 NaN 的梯度裁剪为特定的值（例如，0.0）
-                            # clip_value = 0.0
-                            # nan_mask = torch.isnan(param.grad)
-                            # param.grad[nan_mask] = 0.0 
                             param.grad = torch.nan_to_num(param.grad)
                 l.backward()
                 self.optimizer.step()
