@@ -201,7 +201,7 @@ class TCompoundE(TKBCModel):
 
 
     def get_rhs(self, chunk_begin: int, chunk_size: int):
-        return self.embeddings[0].weight.data[chunk_begin:chunk_begin + chunk_size][:self.rank].transpose(0, 1)
+        return self.embeddings[0].weight.data[chunk_begin:chunk_begin + chunk_size][:, :self.rank].transpose(0, 1)
 
     def get_queries(self, queries: torch.Tensor):
         lhs = self.embeddings[0](queries[:, 0])
@@ -212,9 +212,6 @@ class TCompoundE(TKBCModel):
         rel = rel[:, :self.rank] / ( 1 / self.pi), rel[:, self.rank:] / ( 1 / self.pi)
         time = time[:, :self.rank], time[:, self.rank:]
 
-        time_phase = torch.abs(self.embeddings[3](queries[:, 3]))
-        time_phase = torch.sin(time_phase[:, :self.rank]), torch.sin(time_phase[:, self.rank:])
-
         rt = (rel[0] + time[0]) * time[1], rel[1]
-        return torch.cat([ (lhs[0] + rt[1]) * rt[0]], 1)
+        return (lhs[0] + rt[1]) * rt[0]
 
