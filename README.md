@@ -2,8 +2,8 @@
 ### Installation
 Create a conda environment with pytorch and scikit-learn :
 ```
-conda create --name teast_env python=3.8
-source activate teast_env
+conda create --name tcom_env python=3.8
+source activate tcom_env
 conda install --file requirements.txt -c pytorch
 ```
 
@@ -18,9 +18,9 @@ python process_gdelt.py
 
 This will create the files required to compute the filtered metrics.
 
-### Reproducing results of TeAST
+### Reproducing results of TCompoundE
 
-In order to reproduce the results of TeAST on the four datasets in the paper,  run the following commands
+In order to reproduce the results of TCompoundE on the four datasets in the paper,  run the following commands
 
 ```
 python  learner.py --dataset ICEWS14 --emb_reg 0.01 --time_reg 0.01 --learning_rate 0.01  --rank 6000  --batch_size 4000  --max_epochs 400
