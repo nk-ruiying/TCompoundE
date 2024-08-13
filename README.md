@@ -18,9 +18,9 @@ python process_gdelt.py
 
 This will create the files required to compute the filtered metrics.
 
-### Reproducing results of TeAST
+### Reproducing results of TCompoundE
 
-In order to reproduce the results of TeAST on the four datasets in the paper,  run the following commands
+In order to reproduce the results of TCompoundE on the four datasets in the paper,  run the following commands
 
 ```
 python  learner.py --dataset ICEWS14 --emb_reg 0.01 --time_reg 0.01 --learning_rate 0.01  --rank 6000  --batch_size 4000  --max_epochs 400
