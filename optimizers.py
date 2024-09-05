@@ -43,13 +43,15 @@ class TKBCOptimizer(object):
                     l_time = self.temporal_regularizer.forward(time)
 
                 l = l_fit + l_reg + l_time
+
+                l.backward()
                 
                 self.optimizer.zero_grad()
                 for param in self.model.parameters():
                     if param.grad is not None:
                         if torch.isnan(param.grad).any():
                             param.grad = torch.nan_to_num(param.grad)
-                l.backward()
+                
                 self.optimizer.step()
                 b_begin += self.batch_size
                 bar.update(input_batch.shape[0])
