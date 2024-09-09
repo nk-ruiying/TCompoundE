@@ -44,9 +44,8 @@ class TKBCOptimizer(object):
 
                 l = l_fit + l_reg + l_time
 
-                l.backward()
-                
                 self.optimizer.zero_grad()
+                l.backward()
                 for param in self.model.parameters():
                     if param.grad is not None:
                         if torch.isnan(param.grad).any():
